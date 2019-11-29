@@ -10,6 +10,14 @@ const PlaceDetailScreen = props => {
     const selectedPlace = useSelector(state =>
         state.places.places.find(place => place.id === placeId)
     );
+    const selectedLocation = {lat: selectedPlace.lat, lng: selectedPlace.lng};
+
+    const showMapHandler = () => {
+        props.navigation.navigate('Map', {
+            readOnly: true,
+            initialLocation: selectedLocation // to have still marker on map
+        });
+    };
 
     return (
         <ScrollView contentContainerStyle={{alignItems: 'center'}}>
@@ -22,8 +30,9 @@ const PlaceDetailScreen = props => {
                     <Text style={styles.address}>{selectedPlace.address}</Text>
                 </View>
                 <MapPreview
-                    location={{lat: selectedPlace.lat, lng: selectedPlace.lng}}
+                    location={selectedLocation}
                     style={styles.mapPreview}
+                    onPress={showMapHandler}
                 />
             </View>
         </ScrollView>
@@ -51,7 +60,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         shadowColor: 'black',
         shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: {width: 0, height: 2},
         shadowRadius: 8,
         elevation: 5,
         backgroundColor: 'white',
