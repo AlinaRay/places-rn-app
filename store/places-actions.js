@@ -24,7 +24,8 @@ export const addPlace = (title, image, location) => {
             throw new Error('Something went wrong!');
         }
 
-        const address = resData.results[0].formatted_address;
+        // const address = resData.results[0].formatted_address; // will work with a valid api key
+        const address = 'Dummy address';
 
         // someFolder/myImage.jpg => ['someFolder', 'myImage.jpg] => myImage.jpg
         const fileName = image.split('/').pop();
