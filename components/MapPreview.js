@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ActivityIndicator, Image, StyleSheet, Text} from 'react-native';
+import {TouchableOpacity, ActivityIndicator, Image, StyleSheet, Text} from 'react-native';
 
 import ENV from '../env';
 import Colors from "../constants/Colors";
@@ -17,16 +17,19 @@ const MapPreview = props => {
             }&key=${ENV.googleApiKey}`;
     }
     return (
-        <View style={{...styles.mapPreview, ...props.style}}>
-            {props.location? (
+        <TouchableOpacity
+            style={{...styles.mapPreview, ...props.style}}
+            onPress={props.onPress}
+        >
+            {props.location ? (
                 <Image
                     style={styles.mapImage}
-                    source={{uri : imagePreviewUrl}}
+                    source={{uri: imagePreviewUrl}}
                 />
-                ) : (
+            ) : (
                 props.children
             )}
-        </View>
+        </TouchableOpacity>
     )
 };
 
